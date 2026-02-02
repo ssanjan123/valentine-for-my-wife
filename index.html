@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine? 💝</title>
+    <title>To My Wife ❤️ 1.5 Months of Awesome!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
         
@@ -15,7 +15,7 @@
         
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%);
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #fd79a8 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,8 +25,25 @@
             position: relative;
         }
         
-        /* Floating hearts background */
-        .hearts-container {
+        /* Ocean waves animation */
+        .ocean {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.2' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave 10s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1440px; }
+        }
+        
+        /* Floating elements */
+        .floating-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -37,26 +54,26 @@
             z-index: 0;
         }
         
-        .floating-heart {
+        .floater {
             position: absolute;
-            font-size: 20px;
-            animation: float-up 8s linear infinite;
-            opacity: 0.6;
+            font-size: 30px;
+            animation: float-down 12s linear infinite;
+            opacity: 0.7;
         }
         
-        @keyframes float-up {
+        @keyframes float-down {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(-100px) rotate(0deg);
                 opacity: 0;
             }
             10% {
-                opacity: 0.6;
+                opacity: 0.7;
             }
             90% {
-                opacity: 0.6;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -65,64 +82,91 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 30px;
             padding: 40px;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             z-index: 10;
             position: relative;
+            margin-bottom: 100px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: pulse-badge 2s infinite;
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.5em;
-            color: #e74c3c;
-            margin-bottom: 20px;
+            font-size: 2.2em;
+            color: #0984e3;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
-        .code-joke {
-            background: #2d3436;
-            color: #00b894;
-            font-family: 'Courier New', monospace;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: left;
-            font-size: 0.9em;
-            position: relative;
-        }
-        
-        .code-joke::before {
-            content: '💻 Developer.exe';
-            display: block;
-            color: #fd79a8;
-            font-size: 0.8em;
-            margin-bottom: 8px;
-        }
-        
-        .highlight {
-            color: #fdcb6e;
-        }
-        
-        .string {
-            color: #55efc4;
-        }
-        
-        .comment {
+        .subtitle {
             color: #636e72;
+            font-size: 1.1em;
+            margin-bottom: 20px;
         }
         
-        .message {
+        .cruise-banner {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
             font-size: 1.2em;
+        }
+        
+        .cruise-banner .ship {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .counter-box {
+            background: #ffeaa7;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #fd79a8;
+        }
+        
+        .counter-box .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e84393;
+        }
+        
+        .counter-box .label {
+            color: #636e72;
+            font-size: 1em;
+        }
+        
+        .funny-box {
+            background: #dfe6e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-style: italic;
             color: #2d3436;
-            line-height: 1.8;
-            margin: 25px 0;
         }
         
         .heart-big {
-            font-size: 80px;
-            margin: 20px 0;
+            font-size: 60px;
+            margin: 15px 0;
             animation: heartbeat 1.5s ease-in-out infinite;
             display: inline-block;
         }
@@ -132,17 +176,24 @@
             50% { transform: scale(1.15); }
         }
         
+        .message {
+            font-size: 1.1em;
+            color: #2d3436;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        
         .btn-container {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 25px;
         }
         
         .btn {
-            padding: 15px 40px;
-            font-size: 1.2em;
+            padding: 15px 35px;
+            font-size: 1.1em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -152,18 +203,18 @@
         }
         
         .btn-yes {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #fd79a8, #e84393);
             color: white;
-            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 5px 20px rgba(253, 121, 168, 0.4);
         }
         
         .btn-yes:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.5);
+            box-shadow: 0 8px 30px rgba(253, 121, 168, 0.5);
         }
         
         .btn-no {
-            background: #dfe6e9;
+            background: #b2bec3;
             color: #636e72;
             position: relative;
         }
@@ -179,9 +230,10 @@
         
         .hidden-message {
             display: none;
-            margin-top: 30px;
+            margin-top: 25px;
             padding: 25px;
-            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
             border-radius: 20px;
             animation: slide-in 0.5s ease-out;
         }
@@ -199,156 +251,165 @@
         
         .hidden-message h2 {
             font-family: 'Pacifico', cursive;
-            color: #d63031;
             margin-bottom: 15px;
             font-size: 1.8em;
         }
         
-        .reasons-list {
+        .promise-list {
             text-align: left;
             margin: 20px 0;
             padding-left: 20px;
+            list-style: none;
         }
         
-        .reasons-list li {
-            margin: 10px 0;
-            color: #2d3436;
-            font-size: 1.1em;
+        .promise-list li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            padding-left: 10px;
         }
         
         .emoji-bullet {
             margin-right: 10px;
         }
         
-        .terminal-effect {
-            display: inline-block;
-            overflow: hidden;
-            border-right: 2px solid #00b894;
-            white-space: nowrap;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00b894 }
-        }
-        
-        .easter-egg {
-            margin-top: 30px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            font-size: 0.9em;
-            color: #636e72;
-        }
-        
-        .commit-message {
-            font-family: 'Courier New', monospace;
-            background: #2d3436;
-            color: #55efc4;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        
         .footer {
             margin-top: 20px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #b2bec3;
         }
         
+        .packing-reminder {
+            background: #fab1a0;
+            color: #d63031;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
         @media (max-width: 600px) {
-            h1 { font-size: 1.8em; }
-            .heart-big { font-size: 60px; }
-            .btn { padding: 12px 30px; font-size: 1em; }
+            h1 { font-size: 1.6em; }
+            .heart-big { font-size: 50px; }
+            .btn { padding: 12px 25px; font-size: 1em; }
+            .counter-box .number { font-size: 2em; }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="floating-container" id="floatingContainer"></div>
+    <div class="ocean"></div>
     
     <div class="main-container">
-        <h1>Hey Beautiful! 💕</h1>
+        <div class="badge">💍 Just Married!</div>
         
-        <div class="code-joke">
-            <span class="highlight">if</span> (you.accept(<span class="string">"my heart"</span>)) {<br>
-            &nbsp;&nbsp;<span class="highlight">return</span> <span class="string">"happilyEverAfter"</span>;<br>
-            } <span class="highlight">else</span> {<br>
-            &nbsp;&nbsp;<span class="comment">// I'll just keep debugging my love 💔</span><br>
-            &nbsp;&nbsp;location.reload(); <span class="comment">// Try again 😅</span><br>
-            }
+        <h1>To My Beautiful Wife 💕</h1>
+        <p class="subtitle">(Yes, I can officially call you that now!)</p>
+        
+        <div class="counter-box">
+            <div class="number" id="daysCounter">45</div>
+            <div class="label">Days of Being Married to the Love of My Life 🎉</div>
         </div>
         
-        <div class="heart-big">💖</div>
+        <div class="cruise-banner">
+            <div class="ship">🚢</div>
+            <strong>Next Adventure Loading...</strong><br>
+            Honeymoon Cruise Mode: ACTIVATED ✨
+        </div>
+        
+        <div class="heart-big">⚓❤️</div>
         
         <p class="message">
-            Roses are red, violets are blue,<br>
-            I wrote you this website<br>
-            'cause I'm into you! 💻❤️
+            Roses are red, the ocean is blue,<br>
+            <span id="poemDays">38</span> days married, and I'm still crazy about you!<br>
+            (Even when you steal all the covers 🛏️)
         </p>
         
+        <div class="funny-box">
+            "Marriage is just texting each other "Do we need anything from the grocery store?" <br>
+            until one of you dies." <br>
+            — Ancient Married Proverb 😂
+        </div>
+        
+        <div class="packing-reminder">
+            🧳 Don't forget: Sunscreen, swimsuits, and your adorable husband!
+        </div>
+        
         <p class="message" style="font-size: 1em; color: #636e72;">
-            They say programmers don't have feelings...<br>
-            But my feelings for you are <strong>NOT NULL</strong> 😎
+            Fun fact: I've been practicing my "romantic cruise dinner" face.<br>
+            Spoiler: It looks a lot like my regular face, but with more staring at you 💕
         </p>
         
         <div class="btn-container">
-            <button class="btn btn-yes" onclick="sayYes()">Yes, I'll be your Valentine! 💘</button>
-            <button class="btn btn-no" onmouseover="runAway(this)">No thanks 💔</button>
+            <button class="btn btn-yes" onclick="sayYes()">
+                Yes, I'll cruise through life with you! 🚢💘
+            </button>
+            <button class="btn btn-no" onmouseover="runAway(this)">
+                Leave you at the port 💔
+            </button>
         </div>
         
         <div class="hidden-message" id="successMessage">
-            <h2>Yay! You said YES! 🎉💕</h2>
-            <p style="font-size: 1.1em; color: #2d3436;">
-                <strong>Relationship status:</strong> <span style="color: #e74c3c;">COMPILED SUCCESSFULLY ✅</span>
-            </p>
-            <p style="margin-top: 15px; color: #636e72;">
-                Error 404: Doubt not found<br>
-                Warning: Excessive happiness detected 😊
+            <h2>All Aboard the Love Boat! 🚢💕</h2>
+            
+            <p style="font-size: 1.1em;">
+                <strong>Booking Confirmed:</strong><br>
+                Lifetime voyage with your favorite first mate! ⚓
             </p>
             
-            <ul class="reasons-list">
-                <li><span class="emoji-bullet">🐛</span> You debug my bad days</li>
-                <li><span class="emoji-bullet">☕</span> You're better than coffee (and that's saying something)</li>
-                <li><span class="emoji-bullet">🚀</span> You make my heart deploy to production</li>
-                <li><span class="emoji-bullet">💾</span> I want to save you in my heart forever</li>
-                <li><span class="emoji-bullet">🔒</span> You've got the only key to my heart's API</li>
+            <p style="margin-top: 15px; font-size: 0.95em;">
+                🌊 Warning: Smooth sailing ahead with occasional storms<br>
+                (mostly because I forget to put the toilet seat down)
+            </p>
+            
+            <ul class="promise-list">
+                <li>🍹 I promise to bring you drinks by the pool (with tiny umbrellas)</li>
+                <li>💃 I vow to dance with you even though I have no rhythm</li>
+                <li>📸 I'll take 500 photos of you until we get the perfect one</li>
+                <li>🦐 I won't judge you at the all-you-can-eat buffet</li>
+                <li>🌅 I'll wake up early for sunrises (and complain quietly)</li>
+                <li>🎭 I'll pretend to enjoy the onboard entertainment with you</li>
+                <li>🛳️ Most importantly: I'll be your person, on land or at sea</li>
             </ul>
             
-            <div class="easter-egg">
-                💡 <strong>Fun fact:</strong> This took me <em>way</em> longer than buying flowers...<br>
-                But you're worth every line of code! 🎯
-                <br><br>
-                <span class="commit-message">git commit -m "feat: add girlfriend to life ❤️"</span>
+            <div style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <strong>Next Port of Call:</strong> Forever & Always 🗺️❤️<br>
+                <em>"Not even iceberg lettuce could sink this ship!" — You, probably</em>
             </div>
         </div>
         
         <p class="footer">
-            Made with 💝 and way too much caffeine<br>
-            <span style="font-size: 0.8em;">P.S. - I promise not to debug on our dates... much 😅</span>
+            Made with 💝 and sea-sickness prevention<br>
+            <span style="font-size: 0.8em;">
+                P.S. — You're the only person I'd share a tiny cruise bathroom with 🚽💕
+            </span>
         </p>
     </div>
 
     <script>
-        // Create floating hearts
-        function createHearts() {
-            const container = document.getElementById('heartsContainer');
-            const hearts = ['💕', '💖', '💗', '💓', '💝', '🌸', '✨'];
+        // Update days counter - Married December 26, 2025
+        function updateCounter() {
+            const weddingDate = new Date('2025-12-26');
+            const today = new Date();
+            const diffTime = Math.abs(today - weddingDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('daysCounter').textContent = diffDays;
+            document.getElementById('poemDays').textContent = diffDays;
+        }
+        updateCounter();
+        
+        // Create floating elements
+        function createFloaters() {
+            const container = document.getElementById('floatingContainer');
+            const items = ['🚢', '⚓', '🌊', '☀️', '🐬', '🏝️', '💖', '🥥', '🍹', '🦐'];
             
             for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'floating-heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 8 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                container.appendChild(heart);
+                const item = document.createElement('div');
+                item.className = 'floater';
+                item.textContent = items[Math.floor(Math.random() * items.length)];
+                item.style.left = Math.random() * 100 + '%';
+                item.style.animationDelay = Math.random() * 12 + 's';
+                item.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(item);
             }
         }
         
@@ -364,26 +425,25 @@
             const msg = document.getElementById('successMessage');
             msg.style.display = 'block';
             
-            // Add confetti effect
-            for (let i = 0; i < 50; i++) {
+            // Add confetti
+            for (let i = 0; i < 60; i++) {
                 setTimeout(() => {
                     createConfetti();
-                }, i * 30);
+                }, i * 25);
             }
             
-            // Scroll to message
             msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
         function createConfetti() {
-            const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6', '#e91e63'];
+            const colors = ['#fd79a8', '#74b9ff', '#0984e3', '#ffeaa7', '#fab1a0', '#55efc4'];
             const confetti = document.createElement('div');
             confetti.style.position = 'fixed';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
+            confetti.style.width = '12px';
+            confetti.style.height = '12px';
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = '-10px';
+            confetti.style.top = '-15px';
             confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
             confetti.style.zIndex = '1000';
             confetti.style.pointerEvents = 'none';
@@ -399,22 +459,18 @@
             }).onfinish = () => confetti.remove();
         }
         
-        // Easter egg: Konami code
-        let konamiCode = [];
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        
+        // Easter egg
+        let keySequence = [];
         document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.key);
-            konamiCode = konamiCode.slice(-10);
-            
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                alert('🎮 Cheat code activated! You found the secret!\n\nYou\'ve unlocked: Unlimited Love ❤️✨');
-                document.body.style.background = 'linear-gradient(135deg, #ff00cc 0%, #333399 50%, #ff0066 100%)';
+            keySequence.push(e.key);
+            keySequence = keySequence.slice(-5);
+            if (keySequence.join('') === 'cruise') {
+                alert('🚢 CRUISE MODE ACTIVATED! 🚢\n\nYou found the secret! Pack your bags! ✨');
+                document.body.style.background = 'linear-gradient(135deg, #00b894 0%, #0984e3 50%, #fdcb6e 100%)';
             }
         });
         
-        // Initialize
-        createHearts();
+        createFloaters();
     </script>
 </body>
 </html>
