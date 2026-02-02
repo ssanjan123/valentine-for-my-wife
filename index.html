@@ -489,49 +489,184 @@
             justify-content: center;
         }
         
-        .inside-content h2 {
+        /* Ticket Design */
+        .ticket {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ticket-top {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 15px 15px 0 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .approved-stamp {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 30px;
+            font-size: 0.7em;
+            font-weight: bold;
+            transform: rotate(15deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .ticket-top h2 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        
+        .ticket-date {
+            font-size: 0.8em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .ticket-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-bottom: 2px dashed #ddd;
+        }
+        
+        .info-box {
+            text-align: center;
+        }
+        
+        .info-label {
+            display: block;
+            font-size: 0.6em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .info-value {
+            display: block;
+            font-size: 0.8em;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        
+        .perks-title {
+            text-align: center;
+            font-size: 0.75em;
             color: #e74c3c;
-            font-size: 1.5em;
+            margin: 15px 0 10px;
+            font-weight: 600;
+        }
+        
+        /* Flip Cards */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin-bottom: 15px;
         }
         
-        .promise-list {
-            list-style: none;
-            margin: 10px 0;
+        .flip-card {
+            aspect-ratio: 1;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
         }
         
-        .promise-list li {
-            padding: 12px;
-            margin: 8px 0;
-            background: rgba(231, 76, 60, 0.1);
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             border-radius: 10px;
-            border-left: 4px solid #e74c3c;
-            font-size: 0.9em;
-            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
         }
         
-        .emoji {
-            font-size: 1.3em;
-            margin-right: 10px;
+        .flip-front {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
         }
         
-        .final-btn {
+        .flip-back {
+            background: #f8f9fa;
+            color: #2c3e50;
+            transform: rotateY(180deg);
+            font-size: 0.55em;
+            padding: 5px;
+            text-align: center;
+            line-height: 1.3;
+            border: 2px solid #667eea;
+        }
+        
+        .barcode-area {
+            text-align: center;
+            padding: 10px 0;
+            border-top: 2px dashed #ddd;
+        }
+        
+        .barcode-visual {
+            height: 40px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000 0px,
+                #000 2px,
+                #fff 2px,
+                #fff 4px,
+                #000 4px,
+                #000 5px,
+                #fff 5px,
+                #fff 8px
+            );
+            margin-bottom: 5px;
+        }
+        
+        .barcode-text {
+            font-family: monospace;
+            font-size: 0.7em;
+            color: #7f8c8d;
+            letter-spacing: 2px;
+        }
+        
+        .board-btn {
             background: linear-gradient(135deg, #22c55e, #16a34a);
             color: white;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.2em;
-            border-radius: 50px;
+            padding: 15px 30px;
+            font-size: 1em;
+            border-radius: 30px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 15px auto;
             box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
             animation: pulse 2s infinite;
+            font-weight: 600;
         }
         
-        .signature {
-            margin-top: 30px;
+        .ticket-footer {
+            text-align: center;
+            font-size: 0.7em;
+            color: #95a5a6;
             font-style: italic;
-            color: #7f8c8d;
+            margin-top: auto;
+            padding-top: 10px;
         }
         
         /* Confetti */
@@ -560,6 +695,7 @@
             <div class="envelope-front">
                 <div class="stamp">🚢</div>
                 <div class="envelope-text">
+                    <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 10px;">Happy Valentine's Day 💝</p>
                     <h1>To My Wife</h1>
                     <p>(Yes, I made a website)</p>
                 </div>
@@ -626,54 +762,72 @@
                 
                 <!-- Inside of card -->
                 <div class="page page-right">
-                    <div class="inside-content">
-                        <h2>The Contract 📜</h2>
+                    <div class="ticket">
+                        <!-- Ticket Header -->
+                        <div class="ticket-top">
+                            <div class="approved-stamp">APPROVED</div>
+                            <h2>🚢 HONEYMOON CRUISE</h2>
+                            <p class="ticket-date">Valentine's Day 2026 • Boarding Pass</p>
+                        </div>
                         
-                        <p style="color: #7f8c8d; margin-bottom: 20px;">
-                            By accepting this cruise, you agree to the following terms:
-                        </p>
+                        <!-- Ticket Info -->
+                        <div class="ticket-info">
+                            <div class="info-box">
+                                <span class="info-label">PASSENGER</span>
+                                <span class="info-value">My Beautiful Wife</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">FROM</span>
+                                <span class="info-value">38 Days of Marriage</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">DESTINATION</span>
+                                <span class="info-value">Forever & Always</span>
+                            </div>
+                        </div>
                         
+                        <!-- Flip Cards Section -->
+                        <div class="perks-title">✨ TAP TO REVEAL PERKS ✨</div>
+                        <div class="flip-grid">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">🍹</div>
+                                <div class="flip-back">Drinks by the pool (when I feel like it)</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">💃</div>
+                                <div class="flip-back">One awkward slow dance included</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">📸</div>
+                                <div class="flip-back">500 photos, maybe 3 good ones</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">🦐</div>
+                                <div class="flip-back">Judgment-free buffet access</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">🌅</div>
+                                <div class="flip-back">Sunrise with minimal complaining</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                                <div class="flip-front">❤️</div>
+                                <div class="flip-back">Being your person forever</div>
+                            </div>
+                        </div>
                         
-                        <ul class="promise-list">
-                            <li>
-                                <span class="emoji">🍹</span>
-                                Unlimited poolside drinks (delivery speed may vary based on my laziness)
-                            </li>
-                            
-                            <li>
-                                <span class="emoji">💃</span>
-                                One (1) mandatory slow dance where I step on your feet
-                            </li>
-                            
-                            <li>
-                                <span class="emoji">📸</span>
-                                500 photos minimum, 3 of which might be good
-                            </li>
-                            
-                            <li>
-                                <span class="emoji">🦐</span>
-                                Judgment-free buffet attendance (I know you're going back for thirds)
-                            </li>
-                            
-                            <li>
-                                <span class="emoji">🌅</span>
-                                Sunrise watching (complaining kept to a minimum)
-                            </li>
-                            
-                            <li>
-                                <span class="emoji">❤️</span>
-                                Being your person, on land or sea, forever
-                            </li>
-                        </ul>
+                        <!-- Barcode -->
+                        <div class="barcode-area">
+                            <div class="barcode-visual"></div>
+                            <div class="barcode-text">LOVE-2026-FOREVER</div>
+                        </div>
                         
-                        
-                        <button class="final-btn" onclick="celebrate()">
-                            Sign Me Up! 🚢
+                        <!-- Accept Button -->
+                        <button class="board-btn" onclick="celebrate()">
+                            🎟️ BOARDING CONFIRMED
                         </button>
                         
-                        
-                        <p class="signature">
-                            — Your husband, who definitely forgot to pack sunscreen
+                        <p class="ticket-footer">
+                            No refunds. No exchanges. You're stuck with me. 💕
                         </p>
                     </div>
                 </div>
