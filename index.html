@@ -3,346 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okay so hear me out...</title>
+    <title>Hi Wife 👋</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 100%);
             min-height: 100vh;
-            line-height: 1.6;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* Animated ocean background */
+        .ocean {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(transparent, rgba(59, 130, 246, 0.3));
+            z-index: 0;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z' fill='rgba(59,130,246,0.2)'/%3E%3C/svg%3E");
+            animation: wave 8s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         
         .container {
-            max-width: 700px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
-        .header {
+        /* Hero card */
+        .hero {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 50px;
+            margin-top: 20px;
+            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.3);
+            animation: float 3s ease-in-out infinite;
         }
         
-        .header h1 {
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero h1 {
             font-size: 2.5em;
-            font-weight: 800;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #f472b6, #fb7185);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         
-        .subheader {
-            color: #94a3b8;
+        .hero p {
+            opacity: 0.9;
             font-size: 1.1em;
         }
         
-        .confession-box {
-            background: #1e293b;
-            border-left: 4px solid #f472b6;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 0 12px 12px 0;
-        }
-        
-        .confession-box h2 {
-            color: #f472b6;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .stat-box {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: 800;
-            color: #f472b6;
-        }
-        
-        .stat-label {
-            color: #94a3b8;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .section {
-            margin: 40px 0;
-        }
-        
-        .section h3 {
-            color: #fb7185;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-        }
-        
-        .roast-list {
-            list-style: none;
-        }
-        
-        .roast-list li {
-            background: #1e293b;
-            padding: 18px 20px;
-            margin: 12px 0;
-            border-radius: 10px;
-            position: relative;
-            padding-left: 50px;
-        }
-        
-        .roast-list li::before {
-            position: absolute;
-            left: 18px;
-            font-size: 1.3em;
-        }
-        
-        .roast-list li:nth-child(1)::before { content: "🛏️"; }
-        .roast-list li:nth-child(2)::before { content: "🍕"; }
-        .roast-list li:nth-child(3)::before { content: "🚢"; }
-        .roast-list li:nth-child(4)::before { content: "💤"; }
-        .roast-list li:nth-child(5)::before { content: "📸"; }
-        
-        .cruise-section {
-            background: linear-gradient(135deg, #1e3a5f, #0f172a);
-            border: 1px solid #334155;
+        /* Big counter */
+        .counter-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             padding: 30px;
-            border-radius: 16px;
-            margin: 40px 0;
             text-align: center;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
-        .cruise-section h3 {
-            color: #7dd3fc;
-            margin-bottom: 15px;
+        .counter-number {
+            font-size: 5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
         }
         
-        .cruise-section p {
+        .counter-label {
             color: #94a3b8;
+            margin-top: 10px;
+            font-size: 1.1em;
         }
         
-        .terms-box {
-            background: #0f172a;
-            border: 2px dashed #475569;
+        /* Interactive cards */
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
             padding: 25px;
-            border-radius: 12px;
-            margin: 30px 0;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
         }
         
-        .terms-box h3 {
-            color: #fbbf24;
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.02);
+        }
+        
+        .card-emoji {
+            font-size: 3em;
             margin-bottom: 15px;
         }
         
-        .terms-box ul {
-            list-style: none;
-            color: #cbd5e1;
-        }
-        
-        .terms-box li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .terms-box li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #22c55e;
-        }
-        
-        .button-section {
-            text-align: center;
-            margin: 50px 0;
-        }
-        
-        .main-btn {
-            background: linear-gradient(135deg, #ec4899, #f472b6);
-            color: white;
-            border: none;
-            padding: 20px 50px;
+        .card-title {
             font-size: 1.2em;
             font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .card-text {
+            color: #94a3b8;
+            font-size: 0.95em;
+        }
+        
+        /* Cruise banner */
+        .cruise-banner {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cruise-banner::before {
+            content: "🚢";
+            font-size: 4em;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            opacity: 0.3;
+        }
+        
+        .cruise-banner h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        /* The button section */
+        .action-area {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .big-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 25px 50px;
+            font-size: 1.3em;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
             transition: all 0.3s;
-            box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+            animation: pulse 2s infinite;
         }
         
-        .main-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(236, 72, 153, 0.4);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
-        .secondary-btn {
+        .big-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(34, 197, 94, 0.5);
+        }
+        
+        .small-btn {
             background: transparent;
             color: #64748b;
             border: 2px solid #475569;
-            padding: 15px 30px;
-            font-size: 1em;
-            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 0.9em;
+            border-radius: 30px;
             cursor: pointer;
-            margin-left: 15px;
+            margin-top: 15px;
             transition: all 0.3s;
         }
         
-        .secondary-btn:hover {
-            border-color: #ef4444;
-            color: #ef4444;
-            transform: translateX(20px);
-            opacity: 0;
-        }
-        
-        .hidden-content {
+        /* Hidden message */
+        .hidden-message {
             display: none;
-            background: #1e293b;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border-radius: 20px;
             padding: 30px;
-            border-radius: 16px;
-            margin-top: 30px;
-            animation: slideUp 0.5s ease;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hidden-content h2 {
-            color: #22c55e;
-            margin-bottom: 20px;
-        }
-        
-        .footer-note {
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9em;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #334155;
-        }
-        
-        .emoji-big {
-            font-size: 3em;
             text-align: center;
             margin: 20px 0;
+            animation: popIn 0.5s ease;
         }
         
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.8em; }
-            .main-btn { padding: 18px 35px; font-size: 1.1em; }
-            .secondary-btn { display: block; margin: 15px auto 0; }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .hidden-message h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.85em;
+        }
+        
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 2em; }
+            .counter-number { font-size: 4em; }
+            .big-btn { padding: 20px 40px; font-size: 1.1em; }
         }
     </style>
 </head>
 <body>
+    <div class="ocean"><div class="wave"></div></div>
+    
     <div class="container">
-        <div class="header">
-            <div class="emoji-big">🚢</div>
-            <h1>Okay, so hear me out...</h1>
-            <p class="subheader">I made you a website. Yes, I'm aware that's weird.</p>
+        <!-- Hero -->
+        <div class="hero">
+            <h1>Hi Wife 👋</h1>
+            <p>I made you a website because cards are boring</p>
         </div>
         
-        <div class="confession-box">
-            <h2>The Situation</h2>
-            <p>It's Valentine's Day. We've been married for <strong id="daysCount">38</strong> days. We're about to go on a cruise. And instead of buying a card like a normal person, I spent way too long making this.</p>
-            <p style="margin-top: 15px; color: #94a3b8;">In my defense, cards don't have buttons. And I really wanted to include a button.</p>
+        <!-- Counter -->
+        <div class="counter-card">
+            <div class="counter-number" id="days">38</div>
+            <div class="counter-label">Days of Putting Up With Me</div>
         </div>
         
-        <div class="stats">
-            <div class="stat-box">
-                <div class="stat-number" id="daysStat">38</div>
-                <div class="stat-label">Days of Marriage</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Times I've Been Told "Stop Hogging The Covers"</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">1</div>
-                <div class="stat-label">Website Made (This One)</div>
-            </div>
+        <!-- Fun cards -->
+        <div class="card" onclick="this.style.transform='rotate(5deg)'">
+            <div class="card-emoji">🛏️</div>
+            <div class="card-title">The Covers Are Mine</div>
+            <div class="card-text">I don't know how I do it. I just do.</div>
         </div>
         
-        <div class="section">
-            <h3>Things You've Signed Up For By Marrying Me:</h3>
-            <ul class="roast-list">
-                <li>Someone who genuinely cannot make the bed properly. I've tried. I have failed every time.</li>
-                <li>A person who will eat the last slice of pizza and then act surprised it was the last one.</li>
-                <li>Someone who thinks he's good at navigating but will definitely get us lost on this cruise at least once.</li>
-                <li>A husband who falls asleep during movies. Every. Single. Time. Even the ones I pick.</li>
-                <li>Someone who will take 47 photos of you and somehow none of them are good. It's a gift.</li>
-            </ul>
+        <div class="card" onclick="this.querySelector('.card-text').textContent='I\'m not even sorry about it'">
+            <div class="card-emoji">🍕</div>
+            <div class="card-title">Last Slice? What Last Slice?</div>
+            <div class="card-text">Tap to reveal my confession</div>
         </div>
         
-        <div class="cruise-section">
-            <h3>🌊 The Honeymoon Situation</h3>
-            <p>We're about to be stuck on a boat together for days. Just us, the ocean, and my questionable dance moves at the onboard club. You sure you want to do this?</p>
-            <p style="margin-top: 15px; font-style: italic; color: #7dd3fc;">(Too late, tickets are bought. You're trapped.)</p>
+        <div class="card">
+            <div class="card-emoji">😴</div>
+            <div class="card-title">Movie Night Expert</div>
+            <div class="card-text">I've mastered the art of falling asleep 10 minutes in</div>
         </div>
         
-        <div class="terms-box">
-            <h3>What I'm Offering (The Contract)</h3>
-            <ul>
-                <li>I will bring you poolside drinks without being asked (eventually)</li>
-                <li>I will pretend to enjoy the formal dinner even in a suit I outgrew</li>
-                <li>I will take photos until your phone storage cries for mercy</li>
-                <li>I will not complain about the tiny bathroom (out loud)</li>
-                <li>I will be your person. That's the deal. Forever.</li>
-            </ul>
+        <div class="card">
+            <div class="card-emoji">📸</div>
+            <div class="card-title">Photographer of the Year</div>
+            <div class="card-text">100 photos. 0 good ones. That's talent.</div>
         </div>
         
-        <div class="button-section">
-            <p style="margin-bottom: 20px; color: #94a3b8;">So... thoughts?</p>
-            <button class="main-btn" onclick="showResponse()">
-                Yeah, you're alright I guess ❤️
+        <!-- Cruise -->
+        <div class="cruise-banner">
+            <h3>🚢 Next Up: Trapped On A Boat Together</h3>
+            <p style="opacity: 0.9;">What could possibly go wrong?</p>
+        </div>
+        
+        <!-- Action -->
+        <div class="action-area">
+            <button class="big-btn" onclick="accept()">
+                Keep Me Anyway ✓
             </button>
-            <button class="secondary-btn" onmouseover="this.style.transform='translateX(100px)'; this.style.opacity='0'">
-                Hard pass
+            <br>
+            <button class="small-btn" onmouseover="runAway(this)">
+                Abandon Ship
             </button>
         </div>
         
-        <div class="hidden-content" id="response">
-            <h2>Contract Accepted ✅</h2>
-            <p>Alright, you're stuck with me. And honestly? I'm pretty happy about that.</p>
-            <p style="margin-top: 15px;">See you on the cruise, wife. Try not to push me overboard.</p>
-            <p style="margin-top: 20px; color: #94a3b8; font-style: italic;">— Your husband, who is definitely going to forget to pack sunscreen</p>
+        <!-- Hidden message -->
+        <div class="hidden-message" id="msg">
+            <h2>Deal! 🤝</h2>
+            <p>You're stuck with me now.</p>
+            <p style="margin-top: 15px; opacity: 0.9;">See you on the cruise! <br>(Bring sunscreen, I won't)</p>
         </div>
         
-        <div class="footer-note">
-            <p>Made with questionable coding skills and too much coffee</p>
-            <p style="margin-top: 10px; font-size: 0.85em;">P.S. — Yes, I know this was unnecessary. No, I won't stop doing unnecessary things.</p>
-        </div>
+        <footer>
+            Made with questionable decisions and too much caffeine
+        </footer>
     </div>
     
     <script>
-        function updateDays() {
-            const wedding = new Date('2025-12-26');
-            const today = new Date();
-            const days = Math.floor((today - wedding) / (1000 * 60 * 60 * 24));
-            document.getElementById('daysCount').textContent = days;
-            document.getElementById('daysStat').textContent = days;
-        }
-        updateDays();
+        // Update days
+        const wedding = new Date('2025-12-26');
+        const today = new Date();
+        document.getElementById('days').textContent = Math.floor((today - wedding) / (1000 * 60 * 60 * 24));
         
-        function showResponse() {
-            document.getElementById('response').style.display = 'block';
-            document.getElementById('response').scrollIntoView({ behavior: 'smooth' });
+        // Accept button
+        function accept() {
+            document.getElementById('msg').style.display = 'block';
+            document.getElementById('msg').scrollIntoView({ behavior: 'smooth' });
+            
+            // Confetti explosion
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => confetti(), i * 30);
+            }
         }
+        
+        // Run away button
+        function runAway(btn) {
+            btn.style.transform = `translate(${(Math.random()-0.5)*200}px, ${(Math.random()-0.5)*100}px)`;
+            btn.style.opacity = '0';
+        }
+        
+        // Confetti effect
+        function confetti() {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + 'vw';
+            c.style.top = '-10px';
+            c.style.background = ['#ec4899', '#22c55e', '#3b82f6', '#fbbf24'][Math.floor(Math.random()*4)];
+            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            document.body.appendChild(c);
+            
+            let y = -10;
+            let rot = 0;
+            const fall = setInterval(() => {
+                y += 5;
+                rot += 10;
+                c.style.top = y + 'px';
+                c.style.transform = `rotate(${rot}deg)`;
+                if (y > window.innerHeight) {
+                    clearInterval(fall);
+                    c.remove();
+                }
+            }, 20);
+        }
+        
+        // Floating emojis in background
+        const emojis = ['🚢', '⚓', '🌊', '🍹', '🏝️'];
+        setInterval(() => {
+            const e = document.createElement('div');
+            e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.position = 'fixed';
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.top = '-50px';
+            e.style.fontSize = '2em';
+            e.style.opacity = '0.3';
+            e.style.pointerEvents = 'none';
+            e.style.zIndex = '0';
+            e.style.animation = 'floatDown 10s linear forwards';
+            document.body.appendChild(e);
+            setTimeout(() => e.remove(), 10000);
+        }, 2000);
+        
+        // Add floatDown animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatDown {
+                to { transform: translateY(100vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
