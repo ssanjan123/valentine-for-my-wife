@@ -423,26 +423,27 @@
         /* Story text */
         .story-text {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            top: 15px;
+            left: 15px;
+            right: 15px;
             text-align: center;
             color: #2c3e50;
             z-index: 100;
         }
         
         .story-text h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            margin-bottom: 8px;
             color: #e74c3c;
         }
         
         .story-text p {
-            font-size: 0.95em;
-            line-height: 1.5;
+            font-size: 0.85em;
+            line-height: 1.4;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s forwards;
+            margin-bottom: 8px;
         }
         
         .story-text p:nth-child(2) { animation-delay: 2s; }
@@ -456,15 +457,15 @@
         /* Continue button */
         .continue-btn {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 12px 35px;
             border-radius: 30px;
-            font-size: 1.1em;
+            font-size: 1em;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
             opacity: 0;
@@ -478,30 +479,35 @@
         
         /* Inside page content */
         .inside-content {
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             color: #2c3e50;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .inside-content h2 {
             color: #e74c3c;
-            font-size: 1.8em;
-            margin-bottom: 20px;
+            font-size: 1.5em;
+            margin-bottom: 15px;
         }
         
         .promise-list {
             list-style: none;
-            text-align: left;
-            margin: 20px 0;
+            margin: 10px 0;
         }
         
         .promise-list li {
-            padding: 15px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 8px 0;
             background: rgba(231, 76, 60, 0.1);
             border-radius: 10px;
             border-left: 4px solid #e74c3c;
-            font-size: 0.95em;
+            font-size: 0.9em;
+            line-height: 1.4;
         }
         
         .emoji {
