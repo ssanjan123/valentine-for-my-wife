@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 💝</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Floating hearts background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 8s linear infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .code-joke {
+            background: #2d3436;
+            color: #00b894;
+            font-family: 'Courier New', monospace;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 0.9em;
+            position: relative;
+        }
+        
+        .code-joke::before {
+            content: '💻 Developer.exe';
+            display: block;
+            color: #fd79a8;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            color: #fdcb6e;
+        }
+        
+        .string {
+            color: #55efc4;
+        }
+        
+        .comment {
+            color: #636e72;
+        }
+        
+        .message {
+            font-size: 1.2em;
+            color: #2d3436;
+            line-height: 1.8;
+            margin: 25px 0;
+        }
+        
+        .heart-big {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.5);
+        }
+        
+        .btn-no {
+            background: #dfe6e9;
+            color: #636e72;
+            position: relative;
+        }
+        
+        .btn-no:hover {
+            animation: run-away 0.5s ease-out forwards;
+        }
+        
+        @keyframes run-away {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, -50px); opacity: 0; }
+        }
+        
+        .hidden-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            animation: slide-in 0.5s ease-out;
+        }
+        
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hidden-message h2 {
+            font-family: 'Pacifico', cursive;
+            color: #d63031;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .reasons-list {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .reasons-list li {
+            margin: 10px 0;
+            color: #2d3436;
+            font-size: 1.1em;
+        }
+        
+        .emoji-bullet {
+            margin-right: 10px;
+        }
+        
+        .terminal-effect {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid #00b894;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00b894 }
+        }
+        
+        .easter-egg {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: #636e72;
+        }
+        
+        .commit-message {
+            font-family: 'Courier New', monospace;
+            background: #2d3436;
+            color: #55efc4;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #b2bec3;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .heart-big { font-size: 60px; }
+            .btn { padding: 12px 30px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="main-container">
+        <h1>Hey Beautiful! 💕</h1>
+        
+        <div class="code-joke">
+            <span class="highlight">if</span> (you.accept(<span class="string">"my heart"</span>)) {<br>
+            &nbsp;&nbsp;<span class="highlight">return</span> <span class="string">"happilyEverAfter"</span>;<br>
+            } <span class="highlight">else</span> {<br>
+            &nbsp;&nbsp;<span class="comment">// I'll just keep debugging my love 💔</span><br>
+            &nbsp;&nbsp;location.reload(); <span class="comment">// Try again 😅</span><br>
+            }
+        </div>
+        
+        <div class="heart-big">💖</div>
+        
+        <p class="message">
+            Roses are red, violets are blue,<br>
+            I wrote you this website<br>
+            'cause I'm into you! 💻❤️
+        </p>
+        
+        <p class="message" style="font-size: 1em; color: #636e72;">
+            They say programmers don't have feelings...<br>
+            But my feelings for you are <strong>NOT NULL</strong> 😎
+        </p>
+        
+        <div class="btn-container">
+            <button class="btn btn-yes" onclick="sayYes()">Yes, I'll be your Valentine! 💘</button>
+            <button class="btn btn-no" onmouseover="runAway(this)">No thanks 💔</button>
+        </div>
+        
+        <div class="hidden-message" id="successMessage">
+            <h2>Yay! You said YES! 🎉💕</h2>
+            <p style="font-size: 1.1em; color: #2d3436;">
+                <strong>Relationship status:</strong> <span style="color: #e74c3c;">COMPILED SUCCESSFULLY ✅</span>
+            </p>
+            <p style="margin-top: 15px; color: #636e72;">
+                Error 404: Doubt not found<br>
+                Warning: Excessive happiness detected 😊
+            </p>
+            
+            <ul class="reasons-list">
+                <li><span class="emoji-bullet">🐛</span> You debug my bad days</li>
+                <li><span class="emoji-bullet">☕</span> You're better than coffee (and that's saying something)</li>
+                <li><span class="emoji-bullet">🚀</span> You make my heart deploy to production</li>
+                <li><span class="emoji-bullet">💾</span> I want to save you in my heart forever</li>
+                <li><span class="emoji-bullet">🔒</span> You've got the only key to my heart's API</li>
+            </ul>
+            
+            <div class="easter-egg">
+                💡 <strong>Fun fact:</strong> This took me <em>way</em> longer than buying flowers...<br>
+                But you're worth every line of code! 🎯
+                <br><br>
+                <span class="commit-message">git commit -m "feat: add girlfriend to life ❤️"</span>
+            </div>
+        </div>
+        
+        <p class="footer">
+            Made with 💝 and way too much caffeine<br>
+            <span style="font-size: 0.8em;">P.S. - I promise not to debug on our dates... much 😅</span>
+        </p>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '🌸', '✨'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        
+        // Run away button
+        function runAway(btn) {
+            const x = (Math.random() - 0.5) * 200;
+            const y = (Math.random() - 0.5) * 100;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+        
+        // Yes button click
+        function sayYes() {
+            const msg = document.getElementById('successMessage');
+            msg.style.display = 'block';
+            
+            // Add confetti effect
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 30);
+            }
+            
+            // Scroll to message
+            msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function createConfetti() {
+            const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6', '#e91e63'];
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.zIndex = '1000';
+            confetti.style.pointerEvents = 'none';
+            document.body.appendChild(confetti);
+            
+            const duration = Math.random() * 3 + 2;
+            confetti.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => confetti.remove();
+        }
+        
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                alert('🎮 Cheat code activated! You found the secret!\n\nYou\'ve unlocked: Unlimited Love ❤️✨');
+                document.body.style.background = 'linear-gradient(135deg, #ff00cc 0%, #333399 50%, #ff0066 100%)';
+            }
+        });
+        
+        // Initialize
+        createHearts();
+    </script>
+</body>
+</html>
