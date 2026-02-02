@@ -3,354 +3,734 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi Wife 👋</title>
+    <title>Open Me 🚢</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 100%);
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-        }
-        
-        /* Animated ocean background */
-        .ocean {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(transparent, rgba(59, 130, 246, 0.3));
-            z-index: 0;
-        }
-        
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z' fill='rgba(59,130,246,0.2)'/%3E%3C/svg%3E");
-            animation: wave 8s linear infinite;
-        }
-        
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Hero card */
-        .hero {
-            background: linear-gradient(135deg, #ec4899, #f472b6);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .hero p {
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        
-        /* Big counter */
-        .counter-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .counter-number {
-            font-size: 5em;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-        
-        .counter-label {
-            color: #94a3b8;
-            margin-top: 10px;
-            font-size: 1.1em;
-        }
-        
-        /* Interactive cards */
-        .card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 25px;
-            margin: 15px 0;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .card:hover {
-            background: rgba(255,255,255,0.1);
-            transform: scale(1.02);
-        }
-        
-        .card-emoji {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        
-        .card-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .card-text {
-            color: #94a3b8;
-            font-size: 0.95em;
-        }
-        
-        /* Cruise banner */
-        .cruise-banner {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            margin: 20px 0;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2000px;
             overflow: hidden;
         }
         
-        .cruise-banner::before {
-            content: "🚢";
-            font-size: 4em;
+        /* Ambient particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
             position: absolute;
-            right: -10px;
-            top: -10px;
-            opacity: 0.3;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: float 15s infinite;
         }
         
-        .cruise-banner h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
         
-        /* The button section */
-        .action-area {
-            text-align: center;
-            padding: 40px 20px;
+        /* Main container */
+        .scene {
+            width: 400px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
         }
         
-        .big-btn {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            border: none;
-            padding: 25px 50px;
-            font-size: 1.3em;
-            font-weight: 700;
-            border-radius: 50px;
+        /* The Envelope */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
-            transition: all 0.3s;
+        }
+        
+        .envelope.open {
+            transform: rotateX(20deg) scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            backface-visibility: hidden;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        
+        .envelope-front::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            border-radius: 20px 20px 0 0;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+        
+        .stamp {
+            width: 80px;
+            height: 100px;
+            background: #f39c12;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 2px dashed rgba(255,255,255,0.3);
+            z-index: 10;
+        }
+        
+        .envelope-text {
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+        
+        .envelope-text h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .envelope-text p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .tap-hint {
+            position: absolute;
+            bottom: 40px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9em;
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
         
-        .big-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 50px rgba(34, 197, 94, 0.5);
+        /* The Card (initially hidden) */
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: scale(0.5) rotateY(180deg);
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
         
-        .small-btn {
-            background: transparent;
-            color: #64748b;
-            border: 2px solid #475569;
-            padding: 12px 30px;
-            font-size: 0.9em;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s;
+        .card.show {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+            pointer-events: all;
         }
         
-        /* Hidden message */
-        .hidden-message {
-            display: none;
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+        
+        /* Card pages */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #fff 100%);
             border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .page-left {
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            transition: transform 1s;
+        }
+        
+        .page-left.flipped {
+            transform: rotateY(-180deg);
+        }
+        
+        .page-right {
+            right: 0;
+            background: linear-gradient(180deg, #fff 0%, #E0F6FF 50%, #87CEEB 100%);
+        }
+        
+        /* 3D Pop-up Scene */
+        .scene-3d {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500;
+            animation: sunPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes sunPulse {
+            0%, 100% { box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500; }
+            50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFA500; }
+        }
+        
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.9;
+            animation: drift 20s linear infinite;
+        }
+        
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+        
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 60px;
+            left: -100px;
+        }
+        
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+        
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 100px;
+            left: -80px;
+            animation-delay: -10s;
+        }
+        
+        .cloud2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            right: 15px;
+        }
+        
+        @keyframes drift {
+            from { transform: translateX(0); }
+            to { transform: translateX(500px); }
+        }
+        
+        /* Ocean with waves */
+        .ocean-3d {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45%;
+            background: linear-gradient(180deg, #4FC3F7 0%, #0288D1 50%, #01579B 100%);
+            transform: translateZ(20px);
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+            background-size: 50% 100%;
+            animation: waveMove 4s linear infinite;
+        }
+        
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* 3D Cruise Ship */
+        .ship-container {
+            position: absolute;
+            bottom: 35%;
+            left: 50%;
+            transform: translateX(-50%) translateZ(80px);
+            width: 200px;
+            height: 120px;
+            animation: shipBob 3s ease-in-out infinite;
+        }
+        
+        @keyframes shipBob {
+            0%, 100% { transform: translateX(-50%) translateZ(80px) translateY(0) rotate(-2deg); }
+            50% { transform: translateX(-50%) translateZ(80px) translateY(-10px) rotate(2deg); }
+        }
+        
+        .ship {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .ship-hull {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(180deg, #fff 0%, #e0e0e0 100%);
+            border-radius: 0 0 100px 100px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .ship-body {
+            position: absolute;
+            bottom: 35px;
+            left: 10%;
+            width: 80%;
+            height: 50px;
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .ship-windows {
+            position: absolute;
+            bottom: 50px;
+            left: 15%;
+            width: 70%;
+            height: 20px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .window {
+            width: 12px;
+            height: 12px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #FFD700;
+            animation: windowFlicker 2s ease-in-out infinite;
+        }
+        
+        @keyframes windowFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .ship-deck {
+            position: absolute;
+            bottom: 85px;
+            left: 20%;
+            width: 60%;
+            height: 25px;
+            background: #8D6E63;
+            border-radius: 5px;
+        }
+        
+        .ship-chimney {
+            position: absolute;
+            bottom: 110px;
+            right: 25%;
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(180deg, #e74c3c, #c0392b);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .smoke {
+            position: absolute;
+            bottom: 145px;
+            right: 28%;
+            width: 15px;
+            height: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: smokeRise 2s ease-out infinite;
+        }
+        
+        @keyframes smokeRise {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-50px) scale(2); opacity: 0; }
+        }
+        
+        /* Seagulls */
+        .seagull {
+            position: absolute;
+            font-size: 1.5em;
+            animation: fly 15s linear infinite;
+        }
+        
+        .seagull1 { top: 80px; left: -30px; animation-delay: 0s; }
+        .seagull2 { top: 120px; left: -30px; animation-delay: -7s; }
+        
+        @keyframes fly {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(100px) translateY(-20px); }
+            50% { transform: translateX(200px) translateY(0); }
+            75% { transform: translateX(300px) translateY(-15px); }
+            100% { transform: translateX(430px) translateY(0); }
+        }
+        
+        /* Story text */
+        .story-text {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            color: #2c3e50;
+            z-index: 100;
+        }
+        
+        .story-text h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #e74c3c;
+        }
+        
+        .story-text p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+        
+        .story-text p:nth-child(2) { animation-delay: 2s; }
+        .story-text p:nth-child(3) { animation-delay: 3.5s; }
+        .story-text p:nth-child(4) { animation-delay: 5s; }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Continue button */
+        .continue-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+            opacity: 0;
+            animation: fadeIn 0.5s 6s forwards;
+            z-index: 100;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Inside page content */
+        .inside-content {
             padding: 30px;
             text-align: center;
+            color: #2c3e50;
+        }
+        
+        .inside-content h2 {
+            color: #e74c3c;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        
+        .promise-list {
+            list-style: none;
+            text-align: left;
             margin: 20px 0;
-            animation: popIn 0.5s ease;
         }
         
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .promise-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+            font-size: 0.95em;
         }
         
-        .hidden-message h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
         }
         
+        .final-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        /* Confetti */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
             pointer-events: none;
             z-index: 1000;
         }
         
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #64748b;
-            font-size: 0.85em;
-        }
-        
         @media (max-width: 500px) {
-            .hero h1 { font-size: 2em; }
-            .counter-number { font-size: 4em; }
-            .big-btn { padding: 20px 40px; font-size: 1.1em; }
+            .scene { width: 90vw; height: 70vh; }
+            .envelope-text h1 { font-size: 2em; }
+            .ship-container { transform: translateX(-50%) translateZ(40px) scale(0.8); }
         }
     </style>
 </head>
 <body>
-    <div class="ocean"><div class="wave"></div></div>
+    <!-- Ambient particles -->
+    <div class="particles" id="particles"></div>
     
-    <div class="container">
-        <!-- Hero -->
-        <div class="hero">
-            <h1>Hi Wife 👋</h1>
-            <p>I made you a website because cards are boring</p>
+    <!-- Main Scene -->
+    <div class="scene">
+        
+        <!-- Envelope (Initial State) -->
+        <div class="envelope" id="envelope" onclick="openCard()">
+            <div class="envelope-front">
+                <div class="stamp">🚢</div>
+                <div class="envelope-text">
+                    <h1>To My Wife</h1>
+                    <p>(Yes, I made a website)</p>
+                </div>
+                <div class="tap-hint">👆 Tap to open</div>
+            </div>
         </div>
         
-        <!-- Counter -->
-        <div class="counter-card">
-            <div class="counter-number" id="days">38</div>
-            <div class="counter-label">Days of Putting Up With Me</div>
-        </div>
         
-        <!-- Fun cards -->
-        <div class="card" onclick="this.style.transform='rotate(5deg)'">
-            <div class="card-emoji">🛏️</div>
-            <div class="card-title">The Covers Are Mine</div>
-            <div class="card-text">I don't know how I do it. I just do.</div>
+        <!-- Card (Hidden Initially) -->
+        <div class="card" id="card">
+            <div class="card-inner">
+                
+                <!-- Front of card (The 3D Scene) -->
+                <div class="page page-left" id="pageLeft">
+                    <div class="story-text">
+                        <h2>The Adventure Begins...</h2>
+                        <p>So we're going on a cruise. 38 days married and I'm already trapping you on a boat with me.</p>
+                        <p>I've been told I hog the covers. I fall asleep during movies. My photography skills are... questionable.</p>
+                        <p>But I promise to make you laugh, bring you drinks, and pretend I know how to navigate. Here we go! 🚢</p>
+                    </div>
+                    
+                    <!-- 3D Scene -->
+                    <div class="scene-3d">
+                        <!-- Sky elements -->
+                        <div class="sun"></div>
+                        <div class="cloud cloud1"></div>
+                        <div class="cloud cloud2"></div>
+                        
+                        <!-- Seagulls -->
+                        <div class="seagull seagull1">🕊️</div>
+                        <div class="seagull seagull2">🕊️</div>
+                        
+                        
+                        <!-- Ocean -->
+                        <div class="ocean-3d">
+                            <div class="wave"></div>
+                        </div>
+                        
+                        
+                        <!-- 3D Ship -->
+                        <div class="ship-container">
+                            <div class="ship">
+                                <div class="ship-hull"></div>
+                                <div class="ship-body"></div>
+                                <div class="ship-windows">
+                                    <div class="window"></div>
+                                    <div class="window"></div>
+                                    <div class="window"></div>
+                                    <div class="window"></div>
+                                    <div class="window"></div>
+                                </div>
+                                <div class="ship-deck"></div>
+                                <div class="ship-chimney"></div>
+                                <div class="smoke"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="continue-btn" onclick="flipPage(event)">
+                        Continue →
+                    </button>
+                </div>
+                
+                
+                <!-- Inside of card -->
+                <div class="page page-right">
+                    <div class="inside-content">
+                        <h2>The Contract 📜</h2>
+                        
+                        <p style="color: #7f8c8d; margin-bottom: 20px;">
+                            By accepting this cruise, you agree to the following terms:
+                        </p>
+                        
+                        
+                        <ul class="promise-list">
+                            <li>
+                                <span class="emoji">🍹</span>
+                                Unlimited poolside drinks (delivery speed may vary based on my laziness)
+                            </li>
+                            
+                            <li>
+                                <span class="emoji">💃</span>
+                                One (1) mandatory slow dance where I step on your feet
+                            </li>
+                            
+                            <li>
+                                <span class="emoji">📸</span>
+                                500 photos minimum, 3 of which might be good
+                            </li>
+                            
+                            <li>
+                                <span class="emoji">🦐</span>
+                                Judgment-free buffet attendance (I know you're going back for thirds)
+                            </li>
+                            
+                            <li>
+                                <span class="emoji">🌅</span>
+                                Sunrise watching (complaining kept to a minimum)
+                            </li>
+                            
+                            <li>
+                                <span class="emoji">❤️</span>
+                                Being your person, on land or sea, forever
+                            </li>
+                        </ul>
+                        
+                        
+                        <button class="final-btn" onclick="celebrate()">
+                            Sign Me Up! 🚢
+                        </button>
+                        
+                        
+                        <p class="signature">
+                            — Your husband, who definitely forgot to pack sunscreen
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="card" onclick="this.querySelector('.card-text').textContent='I\'m not even sorry about it'">
-            <div class="card-emoji">🍕</div>
-            <div class="card-title">Last Slice? What Last Slice?</div>
-            <div class="card-text">Tap to reveal my confession</div>
-        </div>
-        
-        <div class="card">
-            <div class="card-emoji">😴</div>
-            <div class="card-title">Movie Night Expert</div>
-            <div class="card-text">I've mastered the art of falling asleep 10 minutes in</div>
-        </div>
-        
-        <div class="card">
-            <div class="card-emoji">📸</div>
-            <div class="card-title">Photographer of the Year</div>
-            <div class="card-text">100 photos. 0 good ones. That's talent.</div>
-        </div>
-        
-        <!-- Cruise -->
-        <div class="cruise-banner">
-            <h3>🚢 Next Up: Trapped On A Boat Together</h3>
-            <p style="opacity: 0.9;">What could possibly go wrong?</p>
-        </div>
-        
-        <!-- Action -->
-        <div class="action-area">
-            <button class="big-btn" onclick="accept()">
-                Keep Me Anyway ✓
-            </button>
-            <br>
-            <button class="small-btn" onmouseover="runAway(this)">
-                Abandon Ship
-            </button>
-        </div>
-        
-        <!-- Hidden message -->
-        <div class="hidden-message" id="msg">
-            <h2>Deal! 🤝</h2>
-            <p>You're stuck with me now.</p>
-            <p style="margin-top: 15px; opacity: 0.9;">See you on the cruise! <br>(Bring sunscreen, I won't)</p>
-        </div>
-        
-        <footer>
-            Made with questionable decisions and too much caffeine
-        </footer>
     </div>
     
+    
     <script>
-        // Update days
-        const wedding = new Date('2025-12-26');
-        const today = new Date();
-        document.getElementById('days').textContent = Math.floor((today - wedding) / (1000 * 60 * 60 * 24));
+        // Create ambient particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            p.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particles.appendChild(p);
+        }
         
-        // Accept button
-        function accept() {
-            document.getElementById('msg').style.display = 'block';
-            document.getElementById('msg').scrollIntoView({ behavior: 'smooth' });
-            
+        // Open card
+        function openCard() {
+            document.getElementById('envelope').classList.add('open');
+            setTimeout(() => {
+                document.getElementById('card').classList.add('show');
+            }, 500);
+        }
+        
+        // Flip page
+        function flipPage(e) {
+            e.stopPropagation();
+            document.getElementById('pageLeft').classList.add('flipped');
+        }
+        
+        // Celebrate
+        function celebrate() {
             // Confetti explosion
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => confetti(), i * 30);
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => createConfetti(), i * 20);
             }
+            
+            // Show message
+            setTimeout(() => {
+                alert('🎉 Deal! You\'re stuck with me now! See you on the cruise! 🚢❤️');
+            }, 1000);
         }
         
-        // Run away button
-        function runAway(btn) {
-            btn.style.transform = `translate(${(Math.random()-0.5)*200}px, ${(Math.random()-0.5)*100}px)`;
-            btn.style.opacity = '0';
-        }
-        
-        // Confetti effect
-        function confetti() {
+        function createConfetti() {
             const c = document.createElement('div');
             c.className = 'confetti';
             c.style.left = Math.random() * 100 + 'vw';
             c.style.top = '-10px';
-            c.style.background = ['#ec4899', '#22c55e', '#3b82f6', '#fbbf24'][Math.floor(Math.random()*4)];
+            c.style.width = '10px';
+            c.style.height = '10px';
+            c.style.background = ['#e74c3c', '#f39c12', '#22c55e', '#3b82f6', '#ec4899'][Math.floor(Math.random() * 5)];
             c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
             document.body.appendChild(c);
             
             let y = -10;
             let rot = 0;
             const fall = setInterval(() => {
-                y += 5;
-                rot += 10;
+                y += 4;
+                rot += 8;
                 c.style.top = y + 'px';
                 c.style.transform = `rotate(${rot}deg)`;
                 if (y > window.innerHeight) {
@@ -359,32 +739,6 @@
                 }
             }, 20);
         }
-        
-        // Floating emojis in background
-        const emojis = ['🚢', '⚓', '🌊', '🍹', '🏝️'];
-        setInterval(() => {
-            const e = document.createElement('div');
-            e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-            e.style.position = 'fixed';
-            e.style.left = Math.random() * 100 + 'vw';
-            e.style.top = '-50px';
-            e.style.fontSize = '2em';
-            e.style.opacity = '0.3';
-            e.style.pointerEvents = 'none';
-            e.style.zIndex = '0';
-            e.style.animation = 'floatDown 10s linear forwards';
-            document.body.appendChild(e);
-            setTimeout(() => e.remove(), 10000);
-        }, 2000);
-        
-        // Add floatDown animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes floatDown {
-                to { transform: translateY(100vh) rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
