@@ -2,20 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Open Me 🚢</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        :root {
+            --color-primary: #e74c3c;
+            --color-primary-dark: #c0392b;
+            --color-accent: #f39c12;
+            --color-success: #22c55e;
+            --color-bg-dark: #1a1a2e;
+            --color-bg-mid: #16213e;
+            --color-bg-light: #0f3460;
+            --color-text: #2c3e50;
+            --color-text-light: #7f8c8d;
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.2);
+            --shadow-medium: 0 20px 60px rgba(0,0,0,0.3);
+            --shadow-heavy: 0 30px 80px rgba(0,0,0,0.4);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        html {
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+        
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-mid) 50%, var(--color-bg-light) 100%);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 2000px;
             overflow: hidden;
+            position: relative;
         }
         
         /* Ambient particles */
@@ -31,9 +56,9 @@
         
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255,255,255,0.5);
+            width: clamp(2px, 0.5vw, 4px);
+            height: clamp(2px, 0.5vw, 4px);
+            background: rgba(255,255,255,0.4);
             border-radius: 50%;
             animation: float 15s infinite;
         }
@@ -47,11 +72,12 @@
         
         /* Main container */
         .scene {
-            width: 400px;
-            height: 600px;
+            width: min(90vw, 420px);
+            height: min(85vh, 650px);
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 1s;
+            transition: transform 1s var(--transition-smooth);
+            z-index: 10;
         }
         
         /* The Envelope */
@@ -60,12 +86,12 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 1.2s var(--transition-smooth);
             cursor: pointer;
         }
         
         .envelope.open {
-            transform: rotateX(20deg) scale(0.9);
+            transform: rotateX(25deg) scale(0.85) translateZ(-100px);
             opacity: 0;
             pointer-events: none;
         }
@@ -74,15 +100,16 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            border-radius: 20px;
+            background: linear-gradient(145deg, #e74c3c 0%, #c0392b 50%, #a93226 100%);
+            border-radius: clamp(12px, 3vw, 20px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            box-shadow: var(--shadow-heavy), inset 0 1px 0 rgba(255,255,255,0.1);
             backface-visibility: hidden;
-            border: 3px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.15);
+            overflow: hidden;
         }
         
         .envelope-front::before {
@@ -91,52 +118,88 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 50%;
-            background: linear-gradient(135deg, #c0392b, #a93226);
-            border-radius: 20px 20px 0 0;
+            height: 52%;
+            background: linear-gradient(145deg, #c0392b 0%, #922b21 100%);
             clip-path: polygon(0 0, 50% 100%, 100% 0);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        
+        .envelope-texture {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
         }
         
         .stamp {
-            width: 80px;
-            height: 100px;
-            background: #f39c12;
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(75px, 18vw, 100px);
+            background: linear-gradient(145deg, #f39c12 0%, #e67e22 100%);
             position: absolute;
-            top: 30px;
-            right: 30px;
-            border-radius: 5px;
+            top: clamp(20px, 5vw, 30px);
+            right: clamp(20px, 5vw, 30px);
+            border-radius: 6px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3em;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: 2px dashed rgba(255,255,255,0.3);
+            font-size: clamp(2em, 8vw, 3em);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+            border: 2px dashed rgba(255,255,255,0.4);
             z-index: 10;
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .envelope:hover .stamp {
+            transform: rotate(0deg) scale(1.05);
         }
         
         .envelope-text {
             z-index: 10;
             text-align: center;
             color: white;
+            padding: 0 clamp(15px, 4vw, 30px);
+        }
+        
+        .envelope-text .subtitle {
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            opacity: 0.85;
+            margin-bottom: clamp(8px, 2vw, 12px);
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
         .envelope-text h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
+            margin-bottom: clamp(8px, 2vw, 12px);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-weight: 700;
+            line-height: 1.1;
         }
         
-        .envelope-text p {
-            font-size: 1.1em;
-            opacity: 0.9;
+        .envelope-text .meta {
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            opacity: 0.8;
+            font-style: italic;
         }
         
         .tap-hint {
             position: absolute;
-            bottom: 40px;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9em;
+            bottom: clamp(30px, 8vw, 50px);
+            color: rgba(255,255,255,0.8);
+            font-size: clamp(0.8rem, 3vw, 0.95rem);
+            font-weight: 500;
             animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tap-hint::before {
+            content: '👆';
+            font-size: 1.2em;
         }
         
         @keyframes pulse {
@@ -144,21 +207,21 @@
             50% { opacity: 1; transform: scale(1.05); }
         }
         
-        /* The Card (initially hidden) */
+        /* The Card */
         .card {
             position: absolute;
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
             opacity: 0;
-            transform: scale(0.5) rotateY(180deg);
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.6) rotateY(180deg) translateZ(-200px);
+            transition: all 1.2s var(--transition-smooth);
             pointer-events: none;
         }
         
         .card.show {
             opacity: 1;
-            transform: scale(1) rotateY(0deg);
+            transform: scale(1) rotateY(0deg) translateZ(0);
             pointer-events: all;
         }
         
@@ -174,9 +237,9 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #fff 100%);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: linear-gradient(180deg, #87CEEB 0%, #B3E5FC 30%, #E1F5FE 60%, #fff 100%);
+            border-radius: clamp(12px, 3vw, 20px);
+            box-shadow: var(--shadow-medium);
             overflow: hidden;
             backface-visibility: hidden;
         }
@@ -184,7 +247,7 @@
         .page-left {
             transform-origin: left center;
             transform: rotateY(0deg);
-            transition: transform 1s;
+            transition: transform 0.8s var(--transition-smooth);
         }
         
         .page-left.flipped {
@@ -193,10 +256,10 @@
         
         .page-right {
             right: 0;
-            background: linear-gradient(180deg, #fff 0%, #E0F6FF 50%, #87CEEB 100%);
+            background: linear-gradient(180deg, #fff 0%, #E1F5FE 40%, #B3E5FC 70%, #87CEEB 100%);
         }
         
-        /* 3D Pop-up Scene */
+        /* 3D Scene */
         .scene-3d {
             position: absolute;
             width: 100%;
@@ -208,79 +271,89 @@
         /* Sun */
         .sun {
             position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, #FFD700 0%, #FFA500 70%);
+            top: clamp(30px, 8vw, 50px);
+            right: clamp(30px, 8vw, 50px);
+            width: clamp(60px, 15vw, 90px);
+            height: clamp(60px, 15vw, 90px);
+            background: radial-gradient(circle at 30% 30%, #FFF9C4 0%, #FFD700 40%, #FFA500 100%);
             border-radius: 50%;
-            box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500;
-            animation: sunPulse 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 165, 0, 0.4);
+            animation: sunPulse 4s ease-in-out infinite;
         }
         
         @keyframes sunPulse {
-            0%, 100% { box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500; }
-            50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFA500; }
+            0%, 100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 165, 0, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.5); transform: scale(1.05); }
         }
         
         /* Clouds */
         .cloud {
             position: absolute;
-            background: white;
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
             border-radius: 100px;
-            opacity: 0.9;
-            animation: drift 20s linear infinite;
+            opacity: 0.95;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .cloud::before {
+        .cloud::before,
+        .cloud::after {
             content: '';
             position: absolute;
-            background: white;
+            background: inherit;
             border-radius: 100px;
         }
         
         .cloud1 {
-            width: 100px;
-            height: 40px;
-            top: 60px;
-            left: -100px;
+            width: clamp(80px, 20vw, 120px);
+            height: clamp(30px, 8vw, 45px);
+            top: clamp(50px, 12vw, 80px);
+            left: -120px;
+            animation: drift 25s linear infinite;
         }
         
         .cloud1::before {
-            width: 50px;
-            height: 50px;
-            top: -25px;
-            left: 10px;
+            width: clamp(40px, 10vw, 60px);
+            height: clamp(40px, 10vw, 60px);
+            top: clamp(-20px, -5vw, -30px);
+            left: clamp(10px, 3vw, 20px);
+        }
+        
+        .cloud1::after {
+            width: clamp(30px, 8vw, 45px);
+            height: clamp(30px, 8vw, 45px);
+            top: clamp(-15px, -4vw, -20px);
+            right: clamp(10px, 3vw, 20px);
         }
         
         .cloud2 {
-            width: 80px;
-            height: 35px;
-            top: 100px;
-            left: -80px;
-            animation-delay: -10s;
+            width: clamp(60px, 15vw, 90px);
+            height: clamp(25px, 6vw, 38px);
+            top: clamp(90px, 20vw, 130px);
+            left: -90px;
+            animation: drift 20s linear infinite;
+            animation-delay: -12s;
         }
         
         .cloud2::before {
-            width: 40px;
-            height: 40px;
-            top: -20px;
-            right: 15px;
+            width: clamp(30px, 8vw, 45px);
+            height: clamp(30px, 8vw, 45px);
+            top: clamp(-15px, -4vw, -22px);
+            right: clamp(12px, 3vw, 18px);
         }
         
         @keyframes drift {
             from { transform: translateX(0); }
-            to { transform: translateX(500px); }
+            to { transform: translateX(calc(100vw + 200px)); }
         }
         
-        /* Ocean with waves */
+        /* Ocean */
         .ocean-3d {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 45%;
-            background: linear-gradient(180deg, #4FC3F7 0%, #0288D1 50%, #01579B 100%);
+            height: 42%;
+            background: linear-gradient(180deg, #29B6F6 0%, #0288D1 30%, #01579B 100%);
             transform: translateZ(20px);
             overflow: hidden;
         }
@@ -289,9 +362,15 @@
             position: absolute;
             width: 200%;
             height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.25)'/%3E%3C/svg%3E");
             background-size: 50% 100%;
-            animation: waveMove 4s linear infinite;
+            animation: waveMove 5s linear infinite;
+        }
+        
+        .wave:nth-child(2) {
+            animation-delay: -2.5s;
+            opacity: 0.5;
+            top: 10px;
         }
         
         @keyframes waveMove {
@@ -302,153 +381,170 @@
         /* 3D Cruise Ship */
         .ship-container {
             position: absolute;
-            bottom: 35%;
+            bottom: 32%;
             left: 50%;
             transform: translateX(-50%) translateZ(80px);
-            width: 200px;
-            height: 120px;
-            animation: shipBob 3s ease-in-out infinite;
+            width: clamp(140px, 35vw, 220px);
+            height: clamp(84px, 21vw, 132px);
+            animation: shipBob 4s ease-in-out infinite;
         }
         
         @keyframes shipBob {
             0%, 100% { transform: translateX(-50%) translateZ(80px) translateY(0) rotate(-2deg); }
-            50% { transform: translateX(-50%) translateZ(80px) translateY(-10px) rotate(2deg); }
+            50% { transform: translateX(-50%) translateZ(80px) translateY(-12px) rotate(2deg); }
         }
         
         .ship {
             width: 100%;
             height: 100%;
             position: relative;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3));
         }
         
         .ship-hull {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 40px;
-            background: linear-gradient(180deg, #fff 0%, #e0e0e0 100%);
+            height: 35%;
+            background: linear-gradient(180deg, #fff 0%, #e8eaf6 50%, #c5cae9 100%);
             border-radius: 0 0 100px 100px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
         }
         
         .ship-body {
             position: absolute;
-            bottom: 35px;
-            left: 10%;
-            width: 80%;
-            height: 50px;
+            bottom: 30%;
+            left: 8%;
+            width: 84%;
+            height: 42%;
             background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
-            border-radius: 10px 10px 0 0;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .ship-windows {
             position: absolute;
-            bottom: 50px;
-            left: 15%;
-            width: 70%;
-            height: 20px;
+            bottom: 42%;
+            left: 12%;
+            width: 76%;
+            height: 18%;
             display: flex;
-            gap: 8px;
+            gap: clamp(4px, 1.5vw, 10px);
             justify-content: center;
         }
         
         .window {
-            width: 12px;
-            height: 12px;
-            background: #FFD700;
+            flex: 1;
+            max-width: clamp(10px, 3vw, 16px);
+            aspect-ratio: 1;
+            background: radial-gradient(circle at 30% 30%, #FFF8E1 0%, #FFD54F 50%, #FF8F00 100%);
             border-radius: 50%;
-            box-shadow: 0 0 10px #FFD700;
-            animation: windowFlicker 2s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(255, 213, 79, 0.6), inset 0 -2px 4px rgba(0,0,0,0.2);
+            animation: windowFlicker 2.5s ease-in-out infinite;
         }
         
+        .window:nth-child(2) { animation-delay: 0.3s; }
+        .window:nth-child(3) { animation-delay: 0.6s; }
+        .window:nth-child(4) { animation-delay: 0.9s; }
+        .window:nth-child(5) { animation-delay: 1.2s; }
+        
         @keyframes windowFlicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.95); }
         }
         
         .ship-deck {
             position: absolute;
-            bottom: 85px;
-            left: 20%;
-            width: 60%;
-            height: 25px;
-            background: #8D6E63;
-            border-radius: 5px;
+            bottom: 70%;
+            left: 18%;
+            width: 64%;
+            height: 20%;
+            background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
+            border-radius: 6px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
         
         .ship-chimney {
             position: absolute;
-            bottom: 110px;
-            right: 25%;
-            width: 20px;
-            height: 30px;
-            background: linear-gradient(180deg, #e74c3c, #c0392b);
-            border-radius: 5px 5px 0 0;
+            bottom: 88%;
+            right: 22%;
+            width: 12%;
+            height: 28%;
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 50%, #922b21 100%);
+            border-radius: 6px 6px 0 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .smoke {
             position: absolute;
-            bottom: 145px;
-            right: 28%;
-            width: 15px;
-            height: 15px;
-            background: rgba(255,255,255,0.6);
+            bottom: 118%;
+            right: 24%;
+            width: clamp(10px, 3vw, 18px);
+            height: clamp(10px, 3vw, 18px);
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%);
             border-radius: 50%;
-            animation: smokeRise 2s ease-out infinite;
+            animation: smokeRise 3s ease-out infinite;
         }
         
+        .smoke:nth-child(2) { animation-delay: 1s; }
+        .smoke:nth-child(3) { animation-delay: 2s; }
+        
         @keyframes smokeRise {
-            0% { transform: translateY(0) scale(1); opacity: 0.6; }
-            100% { transform: translateY(-50px) scale(2); opacity: 0; }
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            100% { transform: translateY(-60px) scale(2.5); opacity: 0; }
         }
         
         /* Seagulls */
         .seagull {
             position: absolute;
-            font-size: 1.5em;
-            animation: fly 15s linear infinite;
+            font-size: clamp(1.2em, 4vw, 1.8em);
+            animation: fly 20s linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
         
-        .seagull1 { top: 80px; left: -30px; animation-delay: 0s; }
-        .seagull2 { top: 120px; left: -30px; animation-delay: -7s; }
+        .seagull1 { top: 12%; left: -10%; animation-delay: 0s; }
+        .seagull2 { top: 18%; left: -10%; animation-delay: -10s; }
         
         @keyframes fly {
             0% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(100px) translateY(-20px); }
-            50% { transform: translateX(200px) translateY(0); }
-            75% { transform: translateX(300px) translateY(-15px); }
-            100% { transform: translateX(430px) translateY(0); }
+            25% { transform: translateX(25vw) translateY(-15px); }
+            50% { transform: translateX(50vw) translateY(5px); }
+            75% { transform: translateX(75vw) translateY(-10px); }
+            100% { transform: translateX(110vw) translateY(0); }
         }
         
         /* Story text */
         .story-text {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
+            top: clamp(10px, 3vw, 20px);
+            left: clamp(10px, 3vw, 20px);
+            right: clamp(10px, 3vw, 20px);
             text-align: center;
-            color: #2c3e50;
+            color: var(--color-text);
             z-index: 100;
         }
         
         .story-text h2 {
-            font-size: 1.3em;
-            margin-bottom: 8px;
-            color: #e74c3c;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+            margin-bottom: clamp(6px, 2vw, 12px);
+            color: var(--color-primary);
+            font-weight: 600;
         }
         
         .story-text p {
-            font-size: 0.85em;
-            line-height: 1.4;
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            line-height: 1.5;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s forwards;
-            margin-bottom: 8px;
+            transform: translateY(15px);
+            animation: fadeInUp 0.7s forwards;
+            margin-bottom: clamp(6px, 2vw, 10px);
+            color: var(--color-text);
         }
         
-        .story-text p:nth-child(2) { animation-delay: 2s; }
-        .story-text p:nth-child(3) { animation-delay: 3.5s; }
-        .story-text p:nth-child(4) { animation-delay: 5s; }
+        .story-text p:nth-child(2) { animation-delay: 1.5s; }
+        .story-text p:nth-child(3) { animation-delay: 3s; }
+        .story-text p:nth-child(4) { animation-delay: 4.5s; }
         
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -457,124 +553,136 @@
         /* Continue button */
         .continue-btn {
             position: absolute;
-            bottom: 15px;
+            bottom: clamp(15px, 4vw, 25px);
             left: 50%;
             transform: translateX(-50%);
-            background: #e74c3c;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: white;
             border: none;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-size: 1em;
+            padding: clamp(10px, 3vw, 14px) clamp(25px, 8vw, 40px);
+            border-radius: 50px;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4), 0 4px 10px rgba(0,0,0,0.2);
             opacity: 0;
-            animation: fadeIn 0.5s 6s forwards;
+            animation: fadeIn 0.5s 5.5s forwards;
             z-index: 100;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .continue-btn:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5);
+        }
+        
+        .continue-btn:active {
+            transform: translateX(-50%) scale(0.98);
         }
         
         @keyframes fadeIn {
             to { opacity: 1; }
         }
         
-        /* Inside page content */
-        .inside-content {
-            padding: 20px;
-            text-align: center;
-            color: #2c3e50;
-            height: 100%;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
         /* Ticket Design */
         .ticket {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
             height: 100%;
             overflow-y: auto;
             position: relative;
-            padding: 20px;
+            padding: clamp(15px, 4vw, 25px);
             display: flex;
             flex-direction: column;
         }
         
         .ticket-top {
             text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            padding: clamp(12px, 4vw, 20px);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             border-radius: 15px 15px 0 0;
             color: white;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
         }
         
         .approved-stamp {
             position: absolute;
-            top: 10px;
-            right: -10px;
-            background: #27ae60;
+            top: 8px;
+            right: -30px;
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
             color: white;
-            padding: 5px 30px;
-            font-size: 0.7em;
-            font-weight: bold;
-            transform: rotate(15deg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 6px 35px;
+            font-size: clamp(0.55rem, 2vw, 0.7rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(12deg);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 2px dashed rgba(255,255,255,0.4);
         }
         
         .ticket-top h2 {
-            font-size: 1.2em;
-            margin-top: 10px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            margin-top: 8px;
+            font-weight: 600;
         }
         
         .ticket-date {
-            font-size: 0.8em;
+            font-size: clamp(0.7rem, 2.5vw, 0.85rem);
             opacity: 0.9;
             margin-top: 5px;
+            font-weight: 500;
         }
         
         .ticket-info {
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
+            padding: clamp(12px, 3vw, 18px) 0;
             border-bottom: 2px dashed #ddd;
+            gap: 8px;
         }
         
         .info-box {
             text-align: center;
+            flex: 1;
         }
         
         .info-label {
             display: block;
-            font-size: 0.6em;
-            color: #7f8c8d;
+            font-size: clamp(0.5rem, 2vw, 0.6rem);
+            color: var(--color-text-light);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
         
         .info-value {
             display: block;
-            font-size: 0.8em;
-            color: #2c3e50;
+            font-size: clamp(0.7rem, 2.8vw, 0.85rem);
+            color: var(--color-text);
             font-weight: 600;
-            margin-top: 3px;
+            margin-top: 4px;
+            line-height: 1.2;
         }
         
         .perks-title {
             text-align: center;
-            font-size: 0.75em;
-            color: #e74c3c;
-            margin: 15px 0 10px;
+            font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+            color: var(--color-primary);
+            margin: clamp(12px, 3vw, 20px) 0 clamp(10px, 2.5vw, 15px);
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         /* Flip Cards */
         .flip-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: clamp(6px, 2vw, 12px);
+            margin-bottom: clamp(12px, 3vw, 20px);
         }
         
         .flip-card {
@@ -582,11 +690,15 @@
             position: relative;
             cursor: pointer;
             transform-style: preserve-3d;
-            transition: transform 0.6s;
+            transition: transform 0.6s var(--transition-smooth);
         }
         
         .flip-card.flipped {
             transform: rotateY(180deg);
+        }
+        
+        .flip-card:hover:not(.flipped) {
+            transform: translateY(-3px);
         }
         
         .flip-front, .flip-back {
@@ -594,79 +706,100 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 10px;
+            border-radius: clamp(8px, 2.5vw, 12px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
+            font-size: clamp(1.3em, 5vw, 2em);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .flip-front {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            transition: all 0.3s ease;
         }
         
         .flip-back {
-            background: #f8f9fa;
-            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--color-text);
             transform: rotateY(180deg);
-            font-size: 0.55em;
-            padding: 5px;
+            font-size: clamp(0.5rem, 2vw, 0.65rem);
+            padding: clamp(4px, 1.5vw, 8px);
             text-align: center;
             line-height: 1.3;
             border: 2px solid #667eea;
+            font-weight: 500;
         }
         
         .barcode-area {
             text-align: center;
-            padding: 10px 0;
+            padding: clamp(10px, 3vw, 15px) 0;
             border-top: 2px dashed #ddd;
         }
         
         .barcode-visual {
-            height: 40px;
+            height: clamp(30px, 8vw, 45px);
             background: repeating-linear-gradient(
                 90deg,
-                #000 0px,
-                #000 2px,
+                #2c3e50 0px,
+                #2c3e50 2px,
                 #fff 2px,
                 #fff 4px,
-                #000 4px,
-                #000 5px,
+                #2c3e50 4px,
+                #2c3e50 5px,
                 #fff 5px,
-                #fff 8px
+                #fff 8px,
+                #2c3e50 8px,
+                #2c3e50 10px,
+                #fff 10px,
+                #fff 12px
             );
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            opacity: 0.8;
         }
         
         .barcode-text {
-            font-family: monospace;
-            font-size: 0.7em;
-            color: #7f8c8d;
-            letter-spacing: 2px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: clamp(0.65rem, 2vw, 0.8rem);
+            color: var(--color-text-light);
+            letter-spacing: 3px;
+            font-weight: 500;
         }
         
         .board-btn {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+            background: linear-gradient(135deg, var(--color-success) 0%, #16a34a 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1em;
-            border-radius: 30px;
+            padding: clamp(12px, 4vw, 16px) clamp(20px, 8vw, 35px);
+            font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+            border-radius: 50px;
             cursor: pointer;
-            margin: 15px auto;
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+            margin: clamp(10px, 3vw, 18px) auto;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4), 0 4px 10px rgba(0,0,0,0.15);
             animation: pulse 2s infinite;
             font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .board-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
+        }
+        
+        .board-btn:active {
+            transform: scale(0.98);
         }
         
         .ticket-footer {
             text-align: center;
-            font-size: 0.7em;
-            color: #95a5a6;
+            font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+            color: var(--color-text-light);
             font-style: italic;
             margin-top: auto;
-            padding-top: 10px;
+            padding-top: clamp(8px, 2vw, 15px);
         }
         
         /* Confetti */
@@ -676,10 +809,53 @@
             z-index: 1000;
         }
         
-        @media (max-width: 500px) {
-            .scene { width: 90vw; height: 70vh; }
-            .envelope-text h1 { font-size: 2em; }
-            .ship-container { transform: translateX(-50%) translateZ(40px) scale(0.8); }
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            .scene {
+                width: 95vw;
+                height: 80vh;
+            }
+            
+            .flip-grid {
+                gap: 5px;
+            }
+            
+            .ticket-info {
+                padding: 10px 0;
+            }
+            
+            .info-value {
+                font-size: 0.65rem;
+            }
+        }
+        
+        @media (min-height: 800px) {
+            .scene {
+                height: 700px;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .scene {
+                height: 90vh;
+            }
+            
+            .story-text p {
+                margin-bottom: 4px;
+            }
+            
+            .ship-container {
+                bottom: 28%;
+            }
+        }
+        
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -690,25 +866,26 @@
     <!-- Main Scene -->
     <div class="scene">
         
-        <!-- Envelope (Initial State) -->
-        <div class="envelope" id="envelope" onclick="openCard()">
+        <!-- Envelope -->
+        <div class="envelope" id="envelope" onclick="openCard()" role="button" tabindex="0" aria-label="Open Valentine's card">
             <div class="envelope-front">
-                <div class="stamp">🚢</div>
+                <div class="envelope-texture"></div>
+                <div class="stamp" aria-hidden="true">🚢</div>
                 <div class="envelope-text">
-                    <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 10px;">Happy Valentine's Day 💝</p>
+                    <p class="subtitle">Happy Valentine's Day 💝</p>
                     <h1>To My Wife</h1>
-                    <p>(Yes, I made a website)</p>
+                    <p class="meta">(Yes, I made a website)</p>
                 </div>
-                <div class="tap-hint">👆 Tap to open</div>
+                <div class="tap-hint">Tap to open</div>
             </div>
         </div>
         
         
-        <!-- Card (Hidden Initially) -->
+        <!-- Card -->
         <div class="card" id="card">
             <div class="card-inner">
                 
-                <!-- Front of card (The 3D Scene) -->
+                <!-- Front of card -->
                 <div class="page page-left" id="pageLeft">
                     <div class="story-text">
                         <h2>The Adventure Begins...</h2>
@@ -719,24 +896,19 @@
                     
                     <!-- 3D Scene -->
                     <div class="scene-3d">
-                        <!-- Sky elements -->
-                        <div class="sun"></div>
-                        <div class="cloud cloud1"></div>
-                        <div class="cloud cloud2"></div>
+                        <div class="sun" aria-hidden="true"></div>
+                        <div class="cloud cloud1" aria-hidden="true"></div>
+                        <div class="cloud cloud2" aria-hidden="true"></div>
                         
-                        <!-- Seagulls -->
-                        <div class="seagull seagull1">🕊️</div>
-                        <div class="seagull seagull2">🕊️</div>
+                        <div class="seagull seagull1" aria-hidden="true">🕊️</div>
+                        <div class="seagull seagull2" aria-hidden="true">🕊️</div>
                         
-                        
-                        <!-- Ocean -->
                         <div class="ocean-3d">
+                            <div class="wave"></div>
                             <div class="wave"></div>
                         </div>
                         
-                        
-                        <!-- 3D Ship -->
-                        <div class="ship-container">
+                        <div class="ship-container" aria-hidden="true">
                             <div class="ship">
                                 <div class="ship-hull"></div>
                                 <div class="ship-body"></div>
@@ -750,11 +922,13 @@
                                 <div class="ship-deck"></div>
                                 <div class="ship-chimney"></div>
                                 <div class="smoke"></div>
+                                <div class="smoke"></div>
+                                <div class="smoke"></div>
                             </div>
                         </div>
                     </div>
                     
-                    <button class="continue-btn" onclick="flipPage(event)">
+                    <button class="continue-btn" onclick="flipPage(event)" aria-label="Continue to boarding pass">
                         Continue →
                     </button>
                 </div>
@@ -763,66 +937,61 @@
                 <!-- Inside of card -->
                 <div class="page page-right">
                     <div class="ticket">
-                        <!-- Ticket Header -->
                         <div class="ticket-top">
                             <div class="approved-stamp">APPROVED</div>
                             <h2>🚢 HONEYMOON CRUISE</h2>
                             <p class="ticket-date">Valentine's Day 2026 • Boarding Pass</p>
                         </div>
                         
-                        <!-- Ticket Info -->
                         <div class="ticket-info">
                             <div class="info-box">
-                                <span class="info-label">PASSENGER</span>
+                                <span class="info-label">Passenger</span>
                                 <span class="info-value">My Beautiful Wife</span>
                             </div>
                             <div class="info-box">
-                                <span class="info-label">FROM</span>
+                                <span class="info-label">From</span>
                                 <span class="info-value">38 Days of Marriage</span>
                             </div>
                             <div class="info-box">
-                                <span class="info-label">DESTINATION</span>
+                                <span class="info-label">Destination</span>
                                 <span class="info-value">Forever & Always</span>
                             </div>
                         </div>
                         
-                        <!-- Flip Cards Section -->
                         <div class="perks-title">✨ TAP TO REVEAL PERKS ✨</div>
                         <div class="flip-grid">
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">🍹</div>
                                 <div class="flip-back">Drinks by the pool (when I feel like it)</div>
                             </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">💃</div>
                                 <div class="flip-back">One awkward slow dance included</div>
                             </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">📸</div>
                                 <div class="flip-back">500 photos, maybe 3 good ones</div>
                             </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">🦐</div>
                                 <div class="flip-back">Judgment-free buffet access</div>
                             </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">🌅</div>
                                 <div class="flip-back">Sunrise with minimal complaining</div>
                             </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">❤️</div>
                                 <div class="flip-back">Being your person forever</div>
                             </div>
                         </div>
                         
-                        <!-- Barcode -->
                         <div class="barcode-area">
-                            <div class="barcode-visual"></div>
+                            <div class="barcode-visual" aria-hidden="true"></div>
                             <div class="barcode-text">LOVE-2026-FOREVER</div>
                         </div>
                         
-                        <!-- Accept Button -->
-                        <button class="board-btn" onclick="celebrate()">
+                        <button class="board-btn" onclick="celebrate()" aria-label="Confirm boarding">
                             🎟️ BOARDING CONFIRMED
                         </button>
                         
@@ -839,22 +1008,36 @@
     <script>
         // Create ambient particles
         const particles = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
+        const particleCount = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 25;
+        
+        for (let i = 0; i < particleCount; i++) {
             const p = document.createElement('div');
             p.className = 'particle';
             p.style.left = Math.random() * 100 + '%';
             p.style.animationDelay = Math.random() * 15 + 's';
-            p.style.animationDuration = (10 + Math.random() * 10) + 's';
+            p.style.animationDuration = (12 + Math.random() * 8) + 's';
             particles.appendChild(p);
         }
         
         // Open card
         function openCard() {
-            document.getElementById('envelope').classList.add('open');
+            const envelope = document.getElementById('envelope');
+            const card = document.getElementById('card');
+            
+            envelope.classList.add('open');
+            
             setTimeout(() => {
-                document.getElementById('card').classList.add('show');
-            }, 500);
+                card.classList.add('show');
+            }, 400);
         }
+        
+        // Keyboard support for envelope
+        document.getElementById('envelope').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openCard();
+            }
+        });
         
         // Flip page
         function flipPage(e) {
@@ -865,40 +1048,62 @@
         // Celebrate
         function celebrate() {
             // Confetti explosion
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => createConfetti(), i * 20);
+            const colors = ['#e74c3c', '#f39c12', '#22c55e', '#3b82f6', '#ec4899', '#FFD700'];
+            
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => createConfetti(colors), i * 15);
             }
             
             // Show message
             setTimeout(() => {
                 alert('🎉 Deal! You\'re stuck with me now! See you on the cruise! 🚢❤️');
-            }, 1000);
+            }, 800);
         }
         
-        function createConfetti() {
+        function createConfetti(colors) {
             const c = document.createElement('div');
             c.className = 'confetti';
             c.style.left = Math.random() * 100 + 'vw';
             c.style.top = '-10px';
-            c.style.width = '10px';
-            c.style.height = '10px';
-            c.style.background = ['#e74c3c', '#f39c12', '#22c55e', '#3b82f6', '#ec4899'][Math.floor(Math.random() * 5)];
-            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            
+            const size = Math.random() * 8 + 6;
+            c.style.width = size + 'px';
+            c.style.height = size + 'px';
+            c.style.background = colors[Math.floor(Math.random() * colors.length)];
+            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            
             document.body.appendChild(c);
             
             let y = -10;
             let rot = 0;
+            let xVel = (Math.random() - 0.5) * 2;
+            let x = parseFloat(c.style.left);
+            
             const fall = setInterval(() => {
-                y += 4;
-                rot += 8;
+                y += 3 + Math.random() * 2;
+                rot += 5 + Math.random() * 5;
+                x += xVel;
+                
                 c.style.top = y + 'px';
+                c.style.left = x + 'vw';
                 c.style.transform = `rotate(${rot}deg)`;
+                
                 if (y > window.innerHeight) {
                     clearInterval(fall);
                     c.remove();
                 }
-            }, 20);
+            }, 16);
         }
+        
+        // Keyboard support for flip cards
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.classList.toggle('flipped');
+                }
+            });
+        });
     </script>
 </body>
 </html>
