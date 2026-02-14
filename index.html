@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Open Me 🚢</title>
+    <title>Open Me 🏝️</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -378,30 +378,30 @@
             100% { transform: translateX(-50%); }
         }
         
-        /* 3D Cruise Ship */
-        .ship-container {
+        /* 3D Ferry */
+        .ferry-container {
             position: absolute;
             bottom: 32%;
             left: 50%;
             transform: translateX(-50%) translateZ(80px);
             width: clamp(140px, 35vw, 220px);
             height: clamp(84px, 21vw, 132px);
-            animation: shipBob 4s ease-in-out infinite;
+            animation: ferryBob 4s ease-in-out infinite;
         }
         
-        @keyframes shipBob {
+        @keyframes ferryBob {
             0%, 100% { transform: translateX(-50%) translateZ(80px) translateY(0) rotate(-2deg); }
             50% { transform: translateX(-50%) translateZ(80px) translateY(-12px) rotate(2deg); }
         }
         
-        .ship {
+        .ferry {
             width: 100%;
             height: 100%;
             position: relative;
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3));
         }
         
-        .ship-hull {
+        .ferry-hull {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -411,7 +411,7 @@
             box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
         }
         
-        .ship-body {
+        .ferry-body {
             position: absolute;
             bottom: 30%;
             left: 8%;
@@ -422,7 +422,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .ship-windows {
+        .ferry-windows {
             position: absolute;
             bottom: 42%;
             left: 12%;
@@ -453,7 +453,7 @@
             50% { opacity: 0.8; transform: scale(0.95); }
         }
         
-        .ship-deck {
+        .ferry-deck {
             position: absolute;
             bottom: 70%;
             left: 18%;
@@ -464,7 +464,7 @@
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
         
-        .ship-chimney {
+        .ferry-stack {
             position: absolute;
             bottom: 88%;
             right: 22%;
@@ -844,7 +844,7 @@
                 margin-bottom: 4px;
             }
             
-            .ship-container {
+            .ferry-container {
                 bottom: 28%;
             }
         }
@@ -870,11 +870,11 @@
         <div class="envelope" id="envelope" onclick="openCard()" role="button" tabindex="0" aria-label="Open Valentine's card">
             <div class="envelope-front">
                 <div class="envelope-texture"></div>
-                <div class="stamp" aria-hidden="true">🚢</div>
+                <div class="stamp" aria-hidden="true">🏝️</div>
                 <div class="envelope-text">
                     <p class="subtitle">Happy Valentine's Day 💝</p>
                     <h1>To My Wife</h1>
-                    <p class="meta">(Yes, I made a website)</p>
+                    <p class="meta">Pack your bags — we're island hopping!</p>
                 </div>
                 <div class="tap-hint">Tap to open</div>
             </div>
@@ -888,10 +888,10 @@
                 <!-- Front of card -->
                 <div class="page page-left" id="pageLeft">
                     <div class="story-text">
-                        <h2>The Adventure Begins...</h2>
-                        <p>So we're going on a cruise. 38 days married and I'm already trapping you on a boat with me.</p>
-                        <p>I've been told I hog the covers. I fall asleep during movies. My photography skills are... questionable.</p>
-                        <p>But I promise to make you laugh, bring you drinks, and pretend I know how to navigate. Here we go! 🚢</p>
+                        <h2>Our Island Adventure Begins...</h2>
+                        <p>Two ferries, one island, and a whole lot of love. We're escaping to Gabriola — the Isle of the Arts.</p>
+                        <p>I've been told I snore. I can't promise perfect photos. And I'll definitely want seconds of that halibut.</p>
+                        <p>But I promise beach walks at sunset, cozy pub nights, and being your person through every ferry ride. Let's go! ⛴️</p>
                     </div>
                     
                     <!-- 3D Scene -->
@@ -908,19 +908,19 @@
                             <div class="wave"></div>
                         </div>
                         
-                        <div class="ship-container" aria-hidden="true">
-                            <div class="ship">
-                                <div class="ship-hull"></div>
-                                <div class="ship-body"></div>
-                                <div class="ship-windows">
+                        <div class="ferry-container" aria-hidden="true">
+                            <div class="ferry">
+                                <div class="ferry-hull"></div>
+                                <div class="ferry-body"></div>
+                                <div class="ferry-windows">
                                     <div class="window"></div>
                                     <div class="window"></div>
                                     <div class="window"></div>
                                     <div class="window"></div>
                                     <div class="window"></div>
                                 </div>
-                                <div class="ship-deck"></div>
-                                <div class="ship-chimney"></div>
+                                <div class="ferry-deck"></div>
+                                <div class="ferry-stack"></div>
                                 <div class="smoke"></div>
                                 <div class="smoke"></div>
                                 <div class="smoke"></div>
@@ -939,8 +939,8 @@
                     <div class="ticket">
                         <div class="ticket-top">
                             <div class="approved-stamp">APPROVED</div>
-                            <h2>🚢 HONEYMOON CRUISE</h2>
-                            <p class="ticket-date">Valentine's Day 2026 • Boarding Pass</p>
+                            <h2>🏝️ GABRIOLA GETAWAY</h2>
+                            <p class="ticket-date">Valentine's Day 2026 • Feb 14-15</p>
                         </div>
                         
                         <div class="ticket-info">
@@ -950,35 +950,35 @@
                             </div>
                             <div class="info-box">
                                 <span class="info-label">From</span>
-                                <span class="info-value">38 Days of Marriage</span>
+                                <span class="info-value">Surrey via 2 Ferries</span>
                             </div>
                             <div class="info-box">
                                 <span class="info-label">Destination</span>
-                                <span class="info-value">Forever & Always</span>
+                                <span class="info-value">Gabriola Island</span>
                             </div>
                         </div>
                         
-                        <div class="perks-title">✨ TAP TO REVEAL PERKS ✨</div>
+                        <div class="perks-title">✨ TAP TO REVEAL ADVENTURE PERKS ✨</div>
                         <div class="flip-grid">
                             <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
-                                <div class="flip-front">🍹</div>
-                                <div class="flip-back">Drinks by the pool (when I feel like it)</div>
-                            </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
-                                <div class="flip-front">💃</div>
-                                <div class="flip-back">One awkward slow dance included</div>
-                            </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
-                                <div class="flip-front">📸</div>
-                                <div class="flip-back">500 photos, maybe 3 good ones</div>
-                            </div>
-                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
-                                <div class="flip-front">🦐</div>
-                                <div class="flip-back">Judgment-free buffet access</div>
+                                <div class="flip-front">🍤</div>
+                                <div class="flip-back">Famous halibut & chips at Surf Lodge</div>
                             </div>
                             <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">🌅</div>
-                                <div class="flip-back">Sunrise with minimal complaining</div>
+                                <div class="flip-back">Sunset at Orlebar Point</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
+                                <div class="flip-front">🎨</div>
+                                <div class="flip-back">Exploring the Isle of the Arts</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
+                                <div class="flip-front">☕</div>
+                                <div class="flip-back">Best coffee at Mad Rona's</div>
+                            </div>
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
+                                <div class="flip-front">🏖️</div>
+                                <div class="flip-back">Beach walks & sandstone cliffs</div>
                             </div>
                             <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" aria-label="Reveal perk">
                                 <div class="flip-front">❤️</div>
@@ -988,15 +988,16 @@
                         
                         <div class="barcode-area">
                             <div class="barcode-visual" aria-hidden="true"></div>
-                            <div class="barcode-text">LOVE-2026-FOREVER</div>
+                            <div class="barcode-text">GABRIOLA-LOVE-2026</div>
                         </div>
                         
-                        <button class="board-btn" onclick="celebrate()" aria-label="Confirm boarding">
-                            🎟️ BOARDING CONFIRMED
+                        <button class="board-btn" onclick="celebrate()" aria-label="Confirm trip">
+                            🎟️ TRIP CONFIRMED
                         </button>
                         
                         <p class="ticket-footer">
-                            No refunds. No exchanges. You're stuck with me. 💕
+                            Surf Lodge & Pub • 885 Berry Point Rd<br>
+                            No refunds. You're stuck with me. 💕
                         </p>
                     </div>
                 </div>
@@ -1056,7 +1057,7 @@
             
             // Show message
             setTimeout(() => {
-                alert('🎉 Deal! You\'re stuck with me now! See you on the cruise! 🚢❤️');
+                alert('🎉 Deal! You\'re stuck with me now! See you on Gabriola! 🏝️❤️');
             }, 800);
         }
         
